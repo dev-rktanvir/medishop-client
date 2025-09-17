@@ -1,0 +1,24 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+/* Tailwind Css & DaisyUi */
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Custome Css */
+body {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: #0a9a73;
+  --color-secondary: #071c1f;
+  --color-accent: #5c727d;
+  --color-base-200: #f2f6f7;
+}
