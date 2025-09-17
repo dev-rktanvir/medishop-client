@@ -9,7 +9,7 @@ const Logo = () => {
                 alt="MediShop logo"
                 className="w-8 h-8"
             />
-            <span className="text-xl font-bold text-primary">MediShop</span>
+            <h2 className="text-xl font-bold text-primary">MediShop</h2>
         </Link>
     );
 };
