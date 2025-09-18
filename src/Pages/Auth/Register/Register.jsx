@@ -3,9 +3,14 @@ import { useForm } from "react-hook-form";
 import { FaUserCircle } from "react-icons/fa";
 import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
 import uploadImg from "../../../assets/image-upload-icon.png";
+import { Link } from "react-router";
 
 const Register = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
     const [preview, setPreview] = useState(null);
 
     const onSubmit = (data) => {
@@ -62,7 +67,11 @@ const Register = () => {
                         className="w-full border px-3 py-2 rounded-md focus:ring focus:ring-blue-300"
                         {...register("name", { required: "Name is required" })}
                     />
-                    {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+                    {errors.name && (
+                        <p className="text-red-500 text-sm">
+                            {errors.name.message}
+                        </p>
+                    )}
                 </div>
 
                 {/* Email */}
@@ -72,9 +81,15 @@ const Register = () => {
                         type="email"
                         placeholder="Enter your email"
                         className="w-full border px-3 py-2 rounded-md focus:ring focus:ring-blue-300"
-                        {...register("email", { required: "Email is required" })}
+                        {...register("email", {
+                            required: "Email is required",
+                        })}
                     />
-                    {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+                    {errors.email && (
+                        <p className="text-red-500 text-sm">
+                            {errors.email.message}
+                        </p>
+                    )}
                 </div>
 
                 {/* Password */}
@@ -84,9 +99,49 @@ const Register = () => {
                         type="password"
                         placeholder="Enter your password"
                         className="w-full border px-3 py-2 rounded-md focus:ring focus:ring-blue-300"
-                        {...register("password", { required: "Password is required" })}
+                        {...register("password", {
+                            required: "Password is required",
+                            validate: {
+                                minLength: (value) =>
+                                    value.length >= 6 ||
+                                    "Password must be at least 6 characters",
+                                hasUpperCase: (value) =>
+                                    /[A-Z]/.test(value) ||
+                                    "Must contain at least one uppercase letter",
+                                hasLowerCase: (value) =>
+                                    /[a-z]/.test(value) ||
+                                    "Must contain at least one lowercase letter",
+                                hasSpecialChar: (value) =>
+                                    /[!@#$%^&*(),.?":{}|<>]/.test(value) ||
+                                    "Must contain at least one special character",
+                            },
+                        })}
                     />
-                    {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+                    {errors.password?.types?.minLength && (
+                        <p className="text-red-500 text-sm">
+                            {errors.password.types.minLength}
+                        </p>
+                    )}
+                    {errors.password?.types?.hasUpperCase && (
+                        <p className="text-red-500 text-sm">
+                            {errors.password.types.hasUpperCase}
+                        </p>
+                    )}
+                    {errors.password?.types?.hasLowerCase && (
+                        <p className="text-red-500 text-sm">
+                            {errors.password.types.hasLowerCase}
+                        </p>
+                    )}
+                    {errors.password?.types?.hasSpecialChar && (
+                        <p className="text-red-500 text-sm">
+                            {errors.password.types.hasSpecialChar}
+                        </p>
+                    )}
+                    {errors.password?.message && (
+                        <p className="text-red-500 text-sm">
+                            {errors.password.message}
+                        </p>
+                    )}
                 </div>
 
                 {/* Role */}
@@ -100,7 +155,11 @@ const Register = () => {
                         <option value="user">User</option>
                         <option value="seller">Seller</option>
                     </select>
-                    {errors.role && <p className="text-red-500 text-sm">{errors.role.message}</p>}
+                    {errors.role && (
+                        <p className="text-red-500 text-sm">
+                            {errors.role.message}
+                        </p>
+                    )}
                 </div>
 
                 {/* Register Button */}
@@ -115,9 +174,7 @@ const Register = () => {
             {/* Already Have Account */}
             <p className="mt-4 text-sm">
                 Already have an account?{" "}
-                <a href="/login" className="text-primary hover:underline">
-                    Login
-                </a>
+                <Link to="/login" className="text-primary hover:underline">Login</Link>
             </p>
 
             {/* Social Login */}
