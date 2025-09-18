@@ -2,16 +2,15 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router";
 import { FaShoppingCart } from "react-icons/fa";
 import Logo from "../../Logo/Logo";
+import useAuth from "../../../hooks/useAuth";
 
 const DesktopNavbar = () => {
-    // dummy auth state
-    const [user, setUser] = useState({ name: "Tanvir", photoURL: "https://i.pravatar.cc/40" });
-    // user = { name: "Tanvir", photoURL: "https://i.pravatar.cc/40" }
+    const {user, logoutUser} = useAuth();
 
     const [openProfileMenu, setOpenProfileMenu] = useState(false);
 
     const handleLogout = () => {
-        setUser(null);
+        logoutUser()
         setOpenProfileMenu(false);
     };
 
@@ -58,7 +57,7 @@ const DesktopNavbar = () => {
                     {/* Auth Buttons */}
                     {!user ? (
                         <Link
-                            to="/join"
+                            to="/login"
                             className="bg-primary text-white px-4 py-2 rounded-md hover:bg-secondary"
                         >
                             Join Us
@@ -69,7 +68,7 @@ const DesktopNavbar = () => {
                             <img
                                 src={user.photoURL}
                                 alt="profile"
-                                className="w-8 h-8 rounded-full cursor-pointer"
+                                className="w-12 h-12 rounded-full cursor-pointer"
                                 onClick={() => setOpenProfileMenu(!openProfileMenu)}
                             />
 

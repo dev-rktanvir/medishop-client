@@ -1,8 +1,13 @@
 import { useForm } from "react-hook-form";
 import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
+import useAuth from "../../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
+    const { loginUser } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -10,8 +15,32 @@ const Login = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        console.log("Login Data:", data);
-        // Add login logic here
+        loginUser(data.email, data.password)
+            .then(result => {
+                Swal.fire({
+                    title: 'Login Successful!',
+                    text: 'You have successfully logged in.',
+                    icon: 'success',
+                    confirmButtonText: 'Proceed',
+                    background: '#f2f6f7',
+                    color: '#071c1f',
+                    confirmButtonColor: '#0a9a73',
+                    timer: 1500,
+                });
+                navigate( location?.state || '/' )
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: 'Login Failed',
+                    text: 'Invalid username or password. Please try again.',
+                    icon: 'error',
+                    confirmButtonText: 'Retry',
+                    background: '#fef2f2',
+                    color: '#7f1d1d',
+                    confirmButtonColor: '#dc2626',
+                    timer: 1500
+                });
+            })
     };
 
     return (

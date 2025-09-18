@@ -2,18 +2,17 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router";
 import { FaShoppingCart, FaBars, FaTimes, FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
 import Logo from "../../Logo/Logo";
+import useAuth from "../../../hooks/useAuth";
 
 const MobileNavbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
 
-    // dummy user state
-    const [user, setUser] = useState({ name: "Tanvir", photoURL: "https://i.pravatar.cc/40" });
-    // const [user, setUser] = useState({ name: "Tanvir", photoURL: "https://i.pravatar.cc/40" });
+    const {user, logoutUser} = useAuth();
 
     const handleLogout = () => {
-        setUser(null);
+        logoutUser()
         setUserMenuOpen(false);
     };
 
