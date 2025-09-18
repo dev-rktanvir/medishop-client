@@ -3,9 +3,17 @@ import { useForm } from "react-hook-form";
 import { FaUserCircle } from "react-icons/fa";
 import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
 import uploadImg from "../../../assets/image-upload-icon.png";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import useAuth from "../../../hooks/useAuth";
+import Swal from "sweetalert2";
+import axios from "axios";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const Register = () => {
+    const { createUser, profileUpdate } = useAuth();
+    const axiosPublic = useAxiosPublic();
+    const [profilePic, setProfilePic] = useState('');
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -13,15 +21,69 @@ const Register = () => {
     } = useForm();
     const [preview, setPreview] = useState(null);
 
+    // From submit
     const onSubmit = (data) => {
-        console.log("Form Data:", data);
+        createUser(data.email, data.password)
+            .then(async (result) => {
+
+                // Success message
+                Swal.fire({
+                    title: 'Registration Successful!',
+                    text: 'Your account has been created.',
+                    icon: 'success',
+                    confirmButtonText: 'Continue',
+                    background: '#f2f6f7',
+                    color: '#071c1f',
+                    confirmButtonColor: '#0a9a73',
+                    timer: 1500
+                });
+                // Update Profile
+                const profileInfo = {
+                    displayName: data.name,
+                    photoURL: profilePic
+                }
+                profileUpdate(profileInfo)
+                    .then(() => { })
+                    .catch(error => { })
+
+                // new user data
+                const newUser = {
+                    name: data.name,
+                    email: data.email,
+                    role: data.role,
+                    created_at: new Date().toISOString()
+                }
+                // Save User data in DB
+                await axiosPublic.post('/users', newUser)
+                navigate('/');
+            })
+            .catch(error => {
+                // Error Message
+                Swal.fire({
+                    title: 'Registration Failed',
+                    text: 'Something went wrong. Please try again.',
+                    icon: 'error',
+                    confirmButtonText: 'Retry',
+                    background: '#f2f6f7',
+                    color: '#071c1f',
+                    confirmButtonColor: '#0a9a73',
+                    timer: 1500
+                });
+            })
     };
 
-    const handleImageChange = (e) => {
+    const handleImageChange = async (e) => {
         const file = e.target.files[0];
         if (file) {
             setPreview(URL.createObjectURL(file));
         }
+        const formData = new FormData();
+        formData.append("image", file)
+
+        const imgUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgUpload_key}`
+        const res = await axios.post(imgUrl, formData);
+        setProfilePic(res.data.data.url);
+
     };
 
     return (
@@ -41,7 +103,7 @@ const Register = () => {
                         <img
                             src={preview}
                             alt="Profile Preview"
-                            className="w-24 h-24 rounded-full object-cover border-2 border-gray-300"
+                            className="w-16 h-16 rounded-full object-cover border-2 border-gray-300"
                         />
                     ) : (
                         <img src={uploadImg} alt="" className="w-12 h-12" />
@@ -50,7 +112,6 @@ const Register = () => {
                         type="file"
                         accept="image/*"
                         className="hidden"
-                        {...register("photo")}
                         onChange={handleImageChange}
                     />
                 </label>
