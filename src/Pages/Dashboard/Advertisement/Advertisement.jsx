@@ -46,7 +46,7 @@ const Advertisement = () => {
             seller_email: user.email,
             medicine_description: data.description,
             image: MedicinePic,
-            status: "Pending",
+            status: "pending",
             created_at: new Date().toISOString()
         };
         // Save data in server
@@ -67,6 +67,22 @@ const Advertisement = () => {
             setIsModalOpen(false);
         }
     };
+    const handleDelete = async (id) => {
+        const res = await axiosSecure.delete(`/ads/${id}`);
+        if (res.data.deletedCount) {
+            Swal.fire({
+                title: 'Ad Deleted!',
+                text: 'The ad has been successfully removed.',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                background: '#f2f6f7',
+                color: '#071c1f',
+                confirmButtonColor: '#0a9a73',
+                timer: 1500
+            });
+            refetch();
+        }
+    }
 
     return (
         <div className="p-6 bg-white rounded-xl shadow-md">
@@ -92,6 +108,7 @@ const Advertisement = () => {
                             <th className="p-3">Medicine Name</th>
                             <th className="p-3">Description</th>
                             <th className="p-3">Status</th>
+                            <th className="p-3">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -107,8 +124,8 @@ const Advertisement = () => {
                                 <td className="p-3 font-medium">{ad.medicine_name}</td>
                                 <td className="p-3 text-sm text-gray-600">{ad.medicine_description}</td>
                                 <td className="p-3">
-                                    <span
-                                        className={`px-3 py-1 rounded-full text-sm ${ad.status === "active"
+                                    <button
+                                        className={`px-4 py-2 rounded-lg font-medium text-sm ${ad.status === "active"
                                             ? "bg-green-100 text-green-600"
                                             : ad.status === "rejected"
                                                 ? "bg-red-100 text-red-600"
@@ -116,7 +133,20 @@ const Advertisement = () => {
                                             }`}
                                     >
                                         {ad.status}
-                                    </span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button
+                                        onClick={() => handleDelete(ad._id)}
+                                        disabled={ad.status === "active"}
+                                        className={`px-4 py-2 rounded-lg transition font-medium 
+                                            ${ad.status === "active"
+                                                ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                                                : "bg-primary text-white cursor-pointer"
+                                            }`}
+                                    >
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                         ))}
@@ -146,9 +176,9 @@ const Advertisement = () => {
                                 </p>
                             </div>
                         </div>
-                        <div>
-                            <span
-                                className={`px-3 py-1 rounded-full text-sm ${ad.status === "active"
+                        <div className="flex gap-4 items-center justify-center">
+                            <button
+                                className={`px-4 py-2 rounded-lg font-medium text-sm ${ad.status === "active"
                                     ? "bg-green-100 text-green-600"
                                     : ad.status === "rejected"
                                         ? "bg-red-100 text-red-600"
@@ -156,7 +186,18 @@ const Advertisement = () => {
                                     }`}
                             >
                                 {ad.status}
-                            </span>
+                            </button>
+                            <button
+                                onClick={() => handleDelete(ad._id)}
+                                disabled={ad.status === "active"}
+                                className={`px-4 py-2 rounded-lg transition font-medium 
+                                        ${ad.status === "active"
+                                        ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                                        : "bg-primary text-white cursor-pointer"
+                                    }`}
+                            >
+                                Delete
+                            </button>
                         </div>
                     </div>
                 ))}

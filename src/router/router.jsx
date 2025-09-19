@@ -7,6 +7,7 @@ import Login from "../Pages/Auth/Login/Login";
 import PrivateRoute from "../route/PrivateRoute/PrivateRoute";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import Advertisement from "../Pages/Dashboard/Advertisement/Advertisement";
+import ManageAds from "../Pages/Dashboard/ManageAds/ManageAds";
 
 export const router = createBrowserRouter([
     {
@@ -38,9 +39,14 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
             {
-                path: 'dashoboard/advertisement',
+                path: 'dashboard/advertisement',
                 Component: Advertisement
+            },
+            {
+                path: 'dashboard/manage-ads',
+                Component: ManageAds
             }
+
         ]
     }
 ]);

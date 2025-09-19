@@ -66,8 +66,8 @@ const DashboardLayout = () => {
                     <nav className="p-4 space-y-2">
                         {[
                             { to: "/dashboard", icon: <FaChartBar />, label: "Dashboard" },
-                            { to: "dashoboard/advertisement", icon: <FaBox />, label: "Advertisement" },
-                            { to: "/dashboard/orders", icon: <FaShoppingCart />, label: "Orders" },
+                            { to: "dashboard/advertisement", icon: <FaBox />, label: "Advertisement" },
+                            { to: "dashboard/manage-ads", icon: <FaShoppingCart />, label: "Manage Ads" },
                             { to: "/dashboard/users", icon: <FaUsers />, label: "Users" },
                         ].map((item) => (
                             <NavLink
