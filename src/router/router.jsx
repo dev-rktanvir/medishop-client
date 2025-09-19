@@ -39,11 +39,11 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
             {
-                path: 'dashboard/advertisement',
+                path: 'advertisement',
                 Component: Advertisement
             },
             {
-                path: 'dashboard/manage-ads',
+                path: 'manage-ads',
                 Component: ManageAds
             }
 

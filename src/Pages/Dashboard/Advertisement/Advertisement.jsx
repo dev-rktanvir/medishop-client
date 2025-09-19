@@ -64,6 +64,7 @@ const Advertisement = () => {
             });
             refetch();
             reset();
+            setPreview(null);
             setIsModalOpen(false);
         }
     };
