@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const Loading = () => {
     return (
-        <div className="flex flex-col items-center justify-center min-h-[60vh]">
+        <div className="flex flex-col items-center justify-center h-screen">
             {/* Capsule Animation */}
             <motion.div
                 className="w-16 h-8 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full relative overflow-hidden"
