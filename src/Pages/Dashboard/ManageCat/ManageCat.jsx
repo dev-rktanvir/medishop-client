@@ -4,10 +4,11 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from '@tanstack/react-query';
 import AddCategoryModal from "./AddCategoryModal";
 import UpdateCategoryModal from "./UpdateCategoryModal";
+import Swal from "sweetalert2";
 
 const ManageCat = () => {
     const axiosSecure = useAxiosSecure();
-    const { data: categories = [] } = useQuery({
+    const { data: categories = [], refetch } = useQuery({
         queryKey: ['allCats'],
         queryFn: async () => {
             const res = await axiosSecure.get('/cats')
@@ -18,6 +19,41 @@ const ManageCat = () => {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
+
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This action will permanently delete the category.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#0a9a73',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            background: '#f2f6f7',
+            color: '#071c1f'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                // Call delete API here...
+                const res = await axiosSecure.delete(`/cats/${id}`)
+                if (res.data.deletedCount) {
+                    Swal.fire({
+                        title: 'Deleted!',
+                        text: 'The category has been successfully deleted.',
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                        background: '#f2f6f7',
+                        color: '#071c1f',
+                        confirmButtonColor: '#0a9a73',
+                        timer: 1500
+                    });
+                    refetch();
+                }
+            }
+        });
+
+    }
+
+    refetch();
     return (
         <div className="p-6">
             {/* Header */}
@@ -65,7 +101,9 @@ const ManageCat = () => {
                                         className="flex gap-3 items-center justify-center px-4 py-2 rounded-lg transition font-medium bg-primary text-white cursor-pointer">
                                         <FaEdit /> Edit
                                     </button>
-                                    <button className="flex gap-3 items-center justify-center px-4 py-2 rounded-lg transition font-medium bg-secondary text-white cursor-pointer">
+                                    <button
+                                        onClick={() => { handleDelete(cat._id) }}
+                                        className="flex gap-3 items-center justify-center px-4 py-2 rounded-lg transition font-medium bg-secondary text-white cursor-pointer">
                                         <FaTrash /> Delete
                                     </button>
                                 </td>

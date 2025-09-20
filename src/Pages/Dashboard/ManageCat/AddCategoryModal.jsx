@@ -1,33 +1,17 @@
-import axios from "axios";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useHandleImg from "../../../hooks/useHandleImg";
 
 const AddCategoryModal = ({ onClose }) => {
     const axiosSecure = useAxiosSecure();
+    const { handleImageChange, preview, uploadedUrl, loading, resetImage } = useHandleImg();
     const { register, handleSubmit, reset } = useForm();
-    const [MedicinePic, setMedicinePic] = useState('');
-    const [preview, setPreview] = useState(null);
 
-    // Handle Image
-    const handleImageChange = async (e) => {
-        const file = e.target.files[0];
-
-        if (file) {
-            setPreview(URL.createObjectURL(file));
-        }
-        const formData = new FormData();
-        formData.append("image", file)
-
-        const imgUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgUpload_key}`
-        const res = await axios.post(imgUrl, formData);
-        setMedicinePic(res.data.data.url);
-    }
     const onSubmit = async (data) => {
         const newCategory = {
             category_name: data.name,
-            category_image: MedicinePic,
+            category_image: uploadedUrl,
             medicine_Qty: data.quantity,
             created_at: new Date().toISOString()
         }
@@ -45,6 +29,7 @@ const AddCategoryModal = ({ onClose }) => {
                 confirmButtonColor: '#0a9a73',
                 timer: 1500
             });
+            resetImage();
         }
         reset();
         onClose();
@@ -90,6 +75,7 @@ const AddCategoryModal = ({ onClose }) => {
                                 className="w-20 h-20 mt-2 object-cover rounded-lg"
                             />
                         }
+                        {loading && <p>Uploading...</p>}
                     </div>
 
                     {/* Quantity */}
