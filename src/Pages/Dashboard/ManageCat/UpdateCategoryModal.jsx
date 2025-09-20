@@ -18,13 +18,13 @@ const UpdateCategoryModal = ({ category, onClose }) => {
     }, [category, setValue]);
 
     const onSubmit = async (data) => {
-        const finalUrl = uploadedUrl || category?.category_image
+        const finalUrl = uploadedUrl || category?.category_image;
         const updateCat = {
             category_name: data.name,
             category_image: finalUrl,
             medicine_Qty: data.quantity
-        }
-        const res = await axiosSecure.patch(`cats/${category._id}`, updateCat)
+        };
+        const res = await axiosSecure.patch(`cats/${category._id}`, updateCat);
         if (res.data.modifiedCount) {
             Swal.fire({
                 title: 'Category Updated!',
@@ -42,8 +42,8 @@ const UpdateCategoryModal = ({ category, onClose }) => {
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
-            <div className="bg-white rounded-xl p-6 w-full max-w-md">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50 px-4">
+            <div className="bg-white rounded-xl p-4 sm:p-6 w-full max-w-lg sm:max-w-md">
                 <h3 className="text-xl font-bold mb-4 text-secondary">
                     Update Category
                 </h3>
@@ -70,13 +70,13 @@ const UpdateCategoryModal = ({ category, onClose }) => {
                             className="w-full border px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-primary"
                             onChange={handleImageChange}
                         />
-                        {preview &&
+                        {preview && (
                             <img
                                 src={preview}
                                 alt="Medicine Preview"
                                 className="w-20 h-20 mt-2 object-cover rounded-lg"
                             />
-                        }
+                        )}
                         {loading && <p>Uploading...</p>}
                     </div>
 
@@ -94,17 +94,17 @@ const UpdateCategoryModal = ({ category, onClose }) => {
                     </div>
 
                     {/* Buttons */}
-                    <div className="flex justify-end gap-3">
+                    <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3">
                         <button
                             type="button"
                             onClick={onClose}
-                            className="px-4 py-2 rounded-lg border text-accent cursor-pointer hover:bg-gray-100"
+                            className="w-full sm:w-auto px-4 py-2 rounded-lg border text-accent cursor-pointer hover:bg-gray-100"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
-                            className="px-4 py-2 rounded-lg bg-primary cursor-pointer text-white hover:bg-emerald-700"
+                            className="w-full sm:w-auto px-4 py-2 rounded-lg bg-primary cursor-pointer text-white hover:bg-emerald-700"
                         >
                             Update
                         </button>

@@ -14,10 +14,9 @@ const AddCategoryModal = ({ onClose }) => {
             category_image: uploadedUrl,
             medicine_Qty: data.quantity,
             created_at: new Date().toISOString()
-        }
+        };
 
-        // save data to DB
-        const res = await axiosSecure.post('/cats', newCategory)
+        const res = await axiosSecure.post('/cats', newCategory);
         if (res.data.insertedId) {
             Swal.fire({
                 title: 'Category Added!',
@@ -36,8 +35,8 @@ const AddCategoryModal = ({ onClose }) => {
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
-            <div className="bg-white rounded-xl p-6 w-full max-w-md">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50 px-4">
+            <div className="bg-white rounded-xl p-4 sm:p-6 w-full max-w-lg sm:max-w-md">
                 <h3 className="text-xl font-bold mb-4 text-secondary">
                     Add New Category
                 </h3>
@@ -68,13 +67,13 @@ const AddCategoryModal = ({ onClose }) => {
                             onChange={handleImageChange}
                             required
                         />
-                        {preview &&
+                        {preview && (
                             <img
                                 src={preview}
                                 alt="Medicine Preview"
                                 className="w-20 h-20 mt-2 object-cover rounded-lg"
                             />
-                        }
+                        )}
                         {loading && <p>Uploading...</p>}
                     </div>
 
@@ -93,17 +92,17 @@ const AddCategoryModal = ({ onClose }) => {
                     </div>
 
                     {/* Buttons */}
-                    <div className="flex justify-end gap-3">
+                    <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3">
                         <button
                             type="button"
                             onClick={onClose}
-                            className="px-4 py-2 rounded-lg border text-accent cursor-pointer hover:bg-gray-100"
+                            className="w-full sm:w-auto px-4 py-2 rounded-lg border text-accent cursor-pointer hover:bg-gray-100"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
-                            className="px-4 py-2 rounded-lg bg-primary cursor-pointer text-white hover:bg-emerald-700"
+                            className="w-full sm:w-auto px-4 py-2 rounded-lg bg-primary cursor-pointer text-white hover:bg-emerald-700"
                         >
                             Add
                         </button>

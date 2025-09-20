@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import AddCategoryModal from "./AddCategoryModal";
 import UpdateCategoryModal from "./UpdateCategoryModal";
 import Swal from "sweetalert2";
+import ManageCatMobile from "./ManageCatMobile";
 
 const ManageCat = () => {
     const axiosSecure = useAxiosSecure();
@@ -57,13 +58,13 @@ const ManageCat = () => {
     return (
         <div className="p-6">
             {/* Header */}
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold text-secondary">
                     Manage Categories
                 </h2>
                 <button
                     onClick={() => setIsAddModalOpen(true)}
-                    className="bg-primary text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-emerald-700"
+                    className="bg-primary text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-emerald-700 mt-4 md:mt-0"
                 >
                     + Add Category
                 </button>
@@ -114,7 +115,11 @@ const ManageCat = () => {
             </div>
 
             {/* Mobile View */}
-
+            <ManageCatMobile
+                categories={categories}
+                handleDelete={handleDelete}
+                refetch={refetch}
+            ></ManageCatMobile>
 
             {/* Modal */}
             {isAddModalOpen && (
