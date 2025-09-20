@@ -1,43 +1,34 @@
-import axios from "axios";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import useHandleImg from "../../../hooks/useHandleImg";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-const AddCategoryModal = ({ onClose }) => {
+const UpdateCategoryModal = ({ category, onClose }) => {
     const axiosSecure = useAxiosSecure();
-    const { register, handleSubmit, reset } = useForm();
-    const [MedicinePic, setMedicinePic] = useState('');
-    const [preview, setPreview] = useState(null);
+    const { register, handleSubmit, setValue } = useForm();
+    const { handleImageChange, preview, uploadedUrl, loading, resetImage } = useHandleImg();
 
-    // Handle Image
-    const handleImageChange = async (e) => {
-        const file = e.target.files[0];
-
-        if (file) {
-            setPreview(URL.createObjectURL(file));
+    // Prefill form data
+    useEffect(() => {
+        if (category) {
+            setValue("name", category.category_name);
+            setValue("quantity", category.medicine_Qty);
         }
-        const formData = new FormData();
-        formData.append("image", file)
+    }, [category, setValue]);
 
-        const imgUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgUpload_key}`
-        const res = await axios.post(imgUrl, formData);
-        setMedicinePic(res.data.data.url);
-    }
     const onSubmit = async (data) => {
-        const newCategory = {
+        const finalUrl = uploadedUrl || category?.category_image
+        const updateCat = {
             category_name: data.name,
-            category_image: MedicinePic,
-            medicine_Qty: data.quantity,
-            created_at: new Date().toISOString()
+            category_image: finalUrl,
+            medicine_Qty: data.quantity
         }
-
-        // save data to DB
-        const res = await axiosSecure.post('/cats', newCategory)
-        if (res.data.insertedId) {
+        const res = await axiosSecure.patch(`cats/${category._id}`, updateCat)
+        if (res.data.modifiedCount) {
             Swal.fire({
-                title: 'Category Added!',
-                text: 'The medicine category has been successfully added.',
+                title: 'Category Updated!',
+                text: 'The category has been successfully updated.',
                 icon: 'success',
                 confirmButtonText: 'OK',
                 background: '#f2f6f7',
@@ -45,27 +36,24 @@ const AddCategoryModal = ({ onClose }) => {
                 confirmButtonColor: '#0a9a73',
                 timer: 1500
             });
+            resetImage();
+            onClose();
         }
-        reset();
-        onClose();
     };
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
             <div className="bg-white rounded-xl p-6 w-full max-w-md">
                 <h3 className="text-xl font-bold mb-4 text-secondary">
-                    Add New Category
+                    Update Category
                 </h3>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     {/* Category Name */}
                     <div>
-                        <label className="block text-sm font-medium mb-1">
-                            Category Name
-                        </label>
+                        <label className="block text-sm font-medium mb-1">Category Name</label>
                         <input
                             {...register("name", { required: true })}
-                            placeholder="Enter category name"
                             className="w-full border px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-primary"
                             required
                         />
@@ -74,14 +62,13 @@ const AddCategoryModal = ({ onClose }) => {
                     {/* Category Image */}
                     <div>
                         <label className="block text-sm font-medium mb-1">
-                            Category Image
+                            Category Image URL
                         </label>
                         <input
                             type="file"
                             accept="image/*"
                             className="w-full border px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-primary"
                             onChange={handleImageChange}
-                            required
                         />
                         {preview &&
                             <img
@@ -90,6 +77,7 @@ const AddCategoryModal = ({ onClose }) => {
                                 className="w-20 h-20 mt-2 object-cover rounded-lg"
                             />
                         }
+                        {loading && <p>Uploading...</p>}
                     </div>
 
                     {/* Quantity */}
@@ -100,7 +88,6 @@ const AddCategoryModal = ({ onClose }) => {
                         <input
                             type="number"
                             {...register("quantity", { valueAsNumber: true }, { required: true })}
-                            placeholder="Enter quantity / 0"
                             className="w-full border px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-primary"
                             required
                         />
@@ -119,7 +106,7 @@ const AddCategoryModal = ({ onClose }) => {
                             type="submit"
                             className="px-4 py-2 rounded-lg bg-primary cursor-pointer text-white hover:bg-emerald-700"
                         >
-                            Add
+                            Update
                         </button>
                     </div>
                 </form>
@@ -128,4 +115,4 @@ const AddCategoryModal = ({ onClose }) => {
     );
 };
 
-export default AddCategoryModal;
+export default UpdateCategoryModal;

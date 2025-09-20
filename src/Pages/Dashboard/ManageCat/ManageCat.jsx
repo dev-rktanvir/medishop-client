@@ -3,6 +3,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from '@tanstack/react-query';
 import AddCategoryModal from "./AddCategoryModal";
+import UpdateCategoryModal from "./UpdateCategoryModal";
 
 const ManageCat = () => {
     const axiosSecure = useAxiosSecure();
@@ -15,6 +16,8 @@ const ManageCat = () => {
     })
 
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+    const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState(null);
     return (
         <div className="p-6">
             {/* Header */}
@@ -26,7 +29,7 @@ const ManageCat = () => {
                     onClick={() => setIsAddModalOpen(true)}
                     className="bg-primary text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-emerald-700"
                 >
-                   + Add Category
+                    + Add Category
                 </button>
             </div>
 
@@ -54,7 +57,12 @@ const ManageCat = () => {
                                 <td className="p-3 font-medium">{cat.category_name}</td>
                                 <td className="p-3 text-sm text-gray-600">{cat.medicine_Qty}</td>
                                 <td className="flex gap-3 p-3">
-                                    <button className="flex gap-3 items-center justify-center px-4 py-2 rounded-lg transition font-medium bg-primary text-white cursor-pointer">
+                                    <button
+                                        onClick={() => {
+                                            setSelectedCategory(cat);
+                                            setIsUpdateModalOpen(true);
+                                        }}
+                                        className="flex gap-3 items-center justify-center px-4 py-2 rounded-lg transition font-medium bg-primary text-white cursor-pointer">
                                         <FaEdit /> Edit
                                     </button>
                                     <button className="flex gap-3 items-center justify-center px-4 py-2 rounded-lg transition font-medium bg-secondary text-white cursor-pointer">
@@ -74,6 +82,12 @@ const ManageCat = () => {
             {isAddModalOpen && (
                 <AddCategoryModal
                     onClose={() => setIsAddModalOpen(false)}
+                />
+            )}
+            {isUpdateModalOpen && (
+                <UpdateCategoryModal
+                    category={selectedCategory}
+                    onClose={() => setIsUpdateModalOpen(false)}
                 />
             )}
         </div>
