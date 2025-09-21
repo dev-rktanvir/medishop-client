@@ -7,7 +7,6 @@ const sliderPromiss = fetch('http://localhost:5000/all-ads').then(res => res.jso
 const SliderBanner = () => {
     const slides = use(sliderPromiss);
     const activeSlides = slides.filter(slide => slide.status === 'active');
-    console.log(activeSlides);
 
     const settings = {
         dots: true,

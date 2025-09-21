@@ -10,6 +10,10 @@ import {
     FaUserEdit,
     FaBars,
     FaTimes,
+    FaBullhorn,
+    FaEdit,
+    FaTags,
+    FaPills,
 } from "react-icons/fa";
 import Logo from "../../Components/Logo/Logo";
 import useAuth from "../../hooks/useAuth";
@@ -66,9 +70,10 @@ const DashboardLayout = () => {
                     <nav className="p-4 space-y-2">
                         {[
                             { to: "/dashboard", icon: <FaChartBar />, label: "Dashboard" },
-                            { to: "advertisement", icon: <FaBox />, label: "Advertisement" },
-                            { to: "manage-ads", icon: <FaShoppingCart />, label: "Manage Ads" },
-                            { to: "manage-cat", icon: <FaUsers />, label: "Manage Category" },
+                            { to: "advertisement", icon: <FaBullhorn />, label: "Advertisement" },       
+                            { to: "manage-ads", icon: <FaEdit />, label: "Manage Ads" },                 
+                            { to: "manage-cat", icon: <FaTags />, label: "Manage Category" },           
+                            { to: "medicine", icon: <FaPills />, label: "Medicine" },
                         ].map((item) => (
                             <NavLink
                                 key={item.to}

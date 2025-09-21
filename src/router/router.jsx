@@ -9,6 +9,7 @@ import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import Advertisement from "../Pages/Dashboard/Advertisement/Advertisement";
 import ManageAds from "../Pages/Dashboard/ManageAds/ManageAds";
 import ManageCat from "../Pages/Dashboard/ManageCat/ManageCat";
+import Medicine from "../Pages/Dashboard/Medicine/Medicine";
 
 export const router = createBrowserRouter([
     {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
             {
                 path: 'manage-cat',
                 Component: ManageCat
+            },
+            {
+                path: 'medicine',
+                Component: Medicine
             }
 
         ]
