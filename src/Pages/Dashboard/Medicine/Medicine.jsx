@@ -4,18 +4,20 @@ import AddMedicineModal from "./AddMedicineModal";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import MedicineMobile from "./MedicineMobile";
+import useAuth from "../../../hooks/useAuth";
 
 const Medicine = () => {
     const axiosSecure = useAxiosSecure();
-    const { data: medicines = [] } = useQuery({
-        queryKey: ['medicine'],
+    const { user } = useAuth();
+    const { data: medicines = [], refetch } = useQuery({
+        queryKey: ['medicine', user.email],
         queryFn: async () => {
-            const res = await axiosSecure.get('/medicine')
+            const res = await axiosSecure.get(`/medicine?email=${user.email}`)
             return res.data;
         }
     })
     const [isAddOpen, setIsAddOpen] = useState(false);
-
+    refetch();
     return (
         <div className="p-6 bg-white rounded-xl shadow-md">
             {/* Header */}

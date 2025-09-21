@@ -10,6 +10,7 @@ import Advertisement from "../Pages/Dashboard/Advertisement/Advertisement";
 import ManageAds from "../Pages/Dashboard/ManageAds/ManageAds";
 import ManageCat from "../Pages/Dashboard/ManageCat/ManageCat";
 import Medicine from "../Pages/Dashboard/Medicine/Medicine";
+import ShopPage from "../Pages/ShopPage/ShopPage";
 
 export const router = createBrowserRouter([
     {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 Component: Home
+            },
+            {
+                path: 'shop',
+                Component: ShopPage
             }
         ]
     },

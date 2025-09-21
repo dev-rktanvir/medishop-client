@@ -4,14 +4,16 @@ import { FaTimes } from "react-icons/fa";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useHandleImg from "../../../hooks/useHandleImg";
 import useAlert from "../../../hooks/useAlert";
+import useAuth from "../../../hooks/useAuth";
 
 const AddMedicineModal = ({ onClose }) => {
     const axiosSecure = useAxiosSecure();
+    const {user} = useAuth();
     const showAlert = useAlert();
     const { handleImageChange, preview, uploadedUrl, loading, resetImage } = useHandleImg();
 
     const { register, handleSubmit, reset } = useForm();
-    const { data: categories = [] } = useQuery({
+    const { data: categories = [], refetch } = useQuery({
         queryKey: ['category'],
         queryFn: async () => {
             const res = await axiosSecure.get('/cats');
@@ -47,7 +49,8 @@ const AddMedicineModal = ({ onClose }) => {
             massUnit: data.massUnit,
             price: parseFloat(data.price),
             discount: parseFloat(data.discount || 0),
-            image: uploadedUrl
+            image: uploadedUrl,
+            sellerEmail: user.email
         };
 
         const res = await axiosSecure.post('/medicine', newMedicine);
@@ -59,6 +62,7 @@ const AddMedicineModal = ({ onClose }) => {
             });
             resetImage();
         }
+        refetch();
         reset();
         onClose();
     };
@@ -66,7 +70,7 @@ const AddMedicineModal = ({ onClose }) => {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
             <div className="bg-white rounded-xl p-4 sm:p-6 w-[95%] sm:w-full max-w-2xl relative overflow-y-auto max-h-[95vh]">
-                <button className="absolute top-4 right-4 text-accent" onClick={onClose}>
+                <button className="absolute top-4 cursor-pointer right-4 text-accent" onClick={onClose}>
                     <FaTimes />
                 </button>
 

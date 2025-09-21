@@ -123,7 +123,7 @@ const MobileNavbar = () => {
             >
                 <div className="flex items-center justify-between p-4 border-b">
                     <h3 className="text-lg font-semibold">Your Cart</h3>
-                    <button onClick={() => setCartOpen(false)}>
+                    <button className="cursor-pointer" onClick={() => setCartOpen(false)}>
                         <FaTimes size={20} />
                     </button>
                 </div>
@@ -139,7 +139,7 @@ const MobileNavbar = () => {
             >
                 <div className="flex items-center justify-between p-4 border-b">
                     <Logo />
-                    <button onClick={() => setMenuOpen(false)}>
+                    <button className="cursor-pointer" onClick={() => setMenuOpen(false)}>
                         <FaTimes size={20} />
                     </button>
                 </div>

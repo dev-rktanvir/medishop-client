@@ -55,7 +55,7 @@ const DashboardLayout = () => {
                     <div className="lg:hidden flex justify-end p-4">
                         <button
                             onClick={() => setIsSidebarOpen(false)}
-                            className="text-white text-2xl"
+                            className="text-white text-2xl cursor-pointer"
                         >
                             <FaTimes />
                         </button>
