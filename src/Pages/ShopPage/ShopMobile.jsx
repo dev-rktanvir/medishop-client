@@ -2,23 +2,8 @@ import { useState } from "react";
 import { FaTrash, FaEdit, FaCartPlus, FaEye } from "react-icons/fa";
 import MedicineDetailsModal from "./MedicineDetailsModal";
 
-const ShopMobile = () => {
+const ShopMobile = ({medicines}) => {
     const [selectedMedicine, setSelectedMedicine] = useState(null);
-    const medicines = [
-        {
-            _id: "68d0113199efbf3e401bbb48",
-            name: "Hyacinth Phelps",
-            genericName: "Fatima Gallagher",
-            shortDescription: "Nisi velit adipisic",
-            category: "Antibiotics",
-            company: "Novartis",
-            massUnit: "ml",
-            price: 143,
-            discount: 45,
-            image: "https://i.ibb.co/XfmV8fdZ/unnamed-11.webp",
-            sellerEmail: "dev.rktanvir@gmail.com"
-        }
-    ];
 
     if (!medicines || medicines.length === 0) {
         return <p className="text-accent">No medicines found.</p>;
