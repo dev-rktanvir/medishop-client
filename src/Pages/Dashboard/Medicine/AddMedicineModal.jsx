@@ -5,7 +5,6 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useHandleImg from "../../../hooks/useHandleImg";
 import useAlert from "../../../hooks/useAlert";
 
-
 const AddMedicineModal = ({ onClose }) => {
     const axiosSecure = useAxiosSecure();
     const showAlert = useAlert();
@@ -15,10 +14,11 @@ const AddMedicineModal = ({ onClose }) => {
     const { data: categories = [] } = useQuery({
         queryKey: ['category'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/cats')
+            const res = await axiosSecure.get('/cats');
             return res.data;
         }
-    })
+    });
+
     const companies = [
         { "id": 1, "name": "Pfizer" },
         { "id": 2, "name": "Johnson & Johnson" },
@@ -35,7 +35,7 @@ const AddMedicineModal = ({ onClose }) => {
         { "id": 13, "name": "Bristol Myers Squibb" },
         { "id": 14, "name": "Takeda Pharmaceutical" },
         { "id": 15, "name": "Sun Pharmaceutical" }
-    ]
+    ];
 
     const submitForm = async (data) => {
         const newMedicine = {
@@ -50,9 +50,7 @@ const AddMedicineModal = ({ onClose }) => {
             image: uploadedUrl
         };
 
-        // save Data in DB
-        const res = await axiosSecure.post('/medicine', newMedicine)
-        console.log(res)
+        const res = await axiosSecure.post('/medicine', newMedicine);
         if (res.data.insertedId) {
             showAlert({
                 title: "Medicine Added!",
@@ -67,7 +65,7 @@ const AddMedicineModal = ({ onClose }) => {
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-            <div className="bg-white rounded-xl p-6 w-full max-w-2xl relative">
+            <div className="bg-white rounded-xl p-4 sm:p-6 w-[95%] sm:w-full max-w-2xl relative overflow-y-auto max-h-[95vh]">
                 <button className="absolute top-4 right-4 text-accent" onClick={onClose}>
                     <FaTimes />
                 </button>
@@ -122,7 +120,7 @@ const AddMedicineModal = ({ onClose }) => {
                             <img
                                 src={preview}
                                 alt="Medicine Preview"
-                                className="w-20 h-20 mt-2 object-cover rounded-lg"
+                                className="w-20 h-20 sm:w-24 sm:h-24 mt-2 object-cover rounded-lg"
                             />
                         )}
                         {loading && <p>Uploading...</p>}
