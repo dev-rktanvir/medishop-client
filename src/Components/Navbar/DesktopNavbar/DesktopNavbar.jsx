@@ -3,9 +3,10 @@ import { Link, NavLink } from "react-router";
 import { FaShoppingCart } from "react-icons/fa";
 import Logo from "../../Logo/Logo";
 import useAuth from "../../../hooks/useAuth";
+import CartIcon from "../../CartIcon/CartIcon";
 
 const DesktopNavbar = () => {
-    const {user, logoutUser} = useAuth();
+    const { user, logoutUser } = useAuth();
 
     const [openProfileMenu, setOpenProfileMenu] = useState(false);
 
@@ -41,10 +42,7 @@ const DesktopNavbar = () => {
 
                     {/* Cart Icon */}
                     <Link to="/cart" className="relative">
-                        <FaShoppingCart size={20} />
-                        <span className="absolute -top-2 -right-2 bg-primary text-white text-xs px-1 rounded-full">
-                            2
-                        </span>
+                        <CartIcon></CartIcon>
                     </Link>
 
                     {/* Language Dropdown */}

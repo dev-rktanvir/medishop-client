@@ -17,7 +17,8 @@ const ShopTable = ({ medicines, pageTitle }) => {
             company: medicine.company,
             price: medicine.price,
             quantity: 1,
-            buyer: user.email
+            buyer: user.email,
+            image: medicine.image
         }
         const res = await axiosSecure.post('/cart', cartItem)
         if (res.data.insertedId) {

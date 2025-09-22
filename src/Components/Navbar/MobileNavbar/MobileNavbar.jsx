@@ -1,18 +1,26 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router";
-import { FaShoppingCart, FaBars, FaTimes, FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
+import {
+    FaShoppingCart,
+    FaBars,
+    FaTimes,
+    FaFacebook,
+    FaTwitter,
+    FaLinkedin,
+    FaInstagram
+} from "react-icons/fa";
 import Logo from "../../Logo/Logo";
 import useAuth from "../../../hooks/useAuth";
+import CartIcon from "../../CartIcon/CartIcon";
 
 const MobileNavbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-    const [cartOpen, setCartOpen] = useState(false);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
 
-    const {user, logoutUser} = useAuth();
+    const { user, logoutUser } = useAuth();
 
     const handleLogout = () => {
-        logoutUser()
+        logoutUser();
         setUserMenuOpen(false);
     };
 
@@ -42,9 +50,11 @@ const MobileNavbar = () => {
                             </button>
                         )}
 
-                        {/* Dropdown with Transition */}
+                        {/* Dropdown */}
                         <div
-                            className={`absolute top-12 left-1/2 -translate-x-1/2 w-40 bg-white shadow-lg rounded-lg py-2 transform transition-all duration-200 ease-in-out ${userMenuOpen ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
+                            className={`absolute top-12 left-1/2 -translate-x-1/2 w-40 bg-white shadow-lg rounded-lg py-2 transform transition-all duration-200 ease-in-out ${userMenuOpen
+                                ? "opacity-100 scale-100"
+                                : "opacity-0 scale-95 pointer-events-none"
                                 }`}
                         >
                             {!user ? (
@@ -98,37 +108,21 @@ const MobileNavbar = () => {
                         </div>
                     </div>
 
-                    {/* Cart */}
-                    <button
-                        onClick={() => setCartOpen(true)}
+                    {/* Cart Icon => redirect to /cart */}
+                    <Link
+                        to="/cart"
                         className="w-10 h-10 flex items-center justify-center border rounded-lg"
                     >
-                        <FaShoppingCart size={18} />
-                    </button>
+                        <CartIcon></CartIcon>
+                    </Link>
 
-                    {/* Hamburger */}
+                    {/* Hamburger Menu */}
                     <button
                         onClick={() => setMenuOpen(true)}
                         className="w-10 h-10 flex items-center justify-center border rounded-lg"
                     >
                         <FaBars size={18} />
                     </button>
-                </div>
-            </div>
-
-            {/* Cart Popup (Right Side) */}
-            <div
-                className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${cartOpen ? "translate-x-0" : "translate-x-full"
-                    }`}
-            >
-                <div className="flex items-center justify-between p-4 border-b">
-                    <h3 className="text-lg font-semibold">Your Cart</h3>
-                    <button className="cursor-pointer" onClick={() => setCartOpen(false)}>
-                        <FaTimes size={20} />
-                    </button>
-                </div>
-                <div className="p-4">
-                    <p className="text-sm text-gray-500">Cart items will appear here...</p>
                 </div>
             </div>
 

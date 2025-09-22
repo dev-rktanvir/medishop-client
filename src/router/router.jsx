@@ -12,6 +12,7 @@ import ManageCat from "../Pages/Dashboard/ManageCat/ManageCat";
 import Medicine from "../Pages/Dashboard/Medicine/Medicine";
 import ShopPage from "../Pages/ShopPage/ShopPage";
 import CatsDetails from "../Pages/CategoryDetails/CatsDetails";
+import Cart from "../Pages/Cart/Cart";
 
 export const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
             {
                 path: 'category/:name',
                 Component: CatsDetails
+            },
+            {
+                path: 'cart',
+                Component: Cart
             }
         ]
     },
