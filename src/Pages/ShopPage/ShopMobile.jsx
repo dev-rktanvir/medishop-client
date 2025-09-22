@@ -1,9 +1,39 @@
 import { useState } from "react";
 import { FaTrash, FaEdit, FaCartPlus, FaEye } from "react-icons/fa";
 import MedicineDetailsModal from "./MedicineDetailsModal";
+import useAuth from "../../hooks/useAuth";
+import useAlert from "../../hooks/useAlert";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-const ShopMobile = ({medicines}) => {
+const ShopMobile = ({ medicines }) => {
+    const {user} = useAuth();
+    const axiosSecure = useAxiosSecure();
+    const showAlert = useAlert();
     const [selectedMedicine, setSelectedMedicine] = useState(null);
+    const handleAddToCart = async (medicine) => {
+        const cartItem = {
+            name: medicine.name,
+            company: medicine.company,
+            price: medicine.price,
+            quantity: 1,
+            buyer: user.email
+        }
+        const res = await axiosSecure.post('/cart', cartItem)
+        if (res.data.insertedId) {
+            showAlert({
+                title: "Added to Cart!",
+                text: `${medicine.name} has been added to your cart successfully.`,
+                icon: "success",
+            });
+        }
+        if (res.data.modifiedCount) {
+            showAlert({
+                title: "Cart Updated!",
+                text: `${medicine.name} is already in your cart. Quantity has been updated.`,
+                icon: "success",
+            });
+        }
+    }
 
     if (!medicines || medicines.length === 0) {
         return <p className="text-accent">No medicines found.</p>;
@@ -45,7 +75,7 @@ const ShopMobile = ({medicines}) => {
                             {/* Select Button */}
                             <button
                                 className="p-2 bg-green-600 text-white rounded-md hover:bg-green-700 cursor-pointer"
-                                onClick={() => handleAddToCart(med)}
+                                onClick={() => handleAddToCart(m)}
                             >
                                 <FaCartPlus />
                             </button>

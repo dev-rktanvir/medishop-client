@@ -2,9 +2,39 @@ import { FaEye, FaCartPlus } from "react-icons/fa";
 import ShopMobile from "../../Pages/ShopPage/ShopMobile";
 import MedicineDetailsModal from "../../Pages/ShopPage/MedicineDetailsModal";
 import { useState } from "react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAlert from "../../hooks/useAlert";
+import useAuth from "../../hooks/useAuth";
 
 const ShopTable = ({ medicines, pageTitle }) => {
+    const axiosSecure = useAxiosSecure();
+    const { user } = useAuth();
+    const showAlert = useAlert();
     const [selectedMedicine, setSelectedMedicine] = useState(null);
+    const handleAddToCart = async (medicine) => {
+        const cartItem = {
+            name: medicine.name,
+            company: medicine.company,
+            price: medicine.price,
+            quantity: 1,
+            buyer: user.email
+        }
+        const res = await axiosSecure.post('/cart', cartItem)
+        if (res.data.insertedId) {
+            showAlert({
+                title: "Added to Cart!",
+                text: `${medicine.name} has been added to your cart successfully.`,
+                icon: "success",
+            });
+        }
+        if (res.data.modifiedCount) {
+            showAlert({
+                title: "Cart Updated!",
+                text: `${medicine.name} is already in your cart. Quantity has been updated.`,
+                icon: "success",
+            });
+        }
+    }
     return (
         <div className="max-w-7xl mx-auto px-4 py-10">
             <h2 className="text-3xl font-bold text-secondary mb-6">{pageTitle}</h2>
