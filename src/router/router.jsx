@@ -11,6 +11,7 @@ import ManageAds from "../Pages/Dashboard/ManageAds/ManageAds";
 import ManageCat from "../Pages/Dashboard/ManageCat/ManageCat";
 import Medicine from "../Pages/Dashboard/Medicine/Medicine";
 import ShopPage from "../Pages/ShopPage/ShopPage";
+import CatsDetails from "../Pages/CategoryDetails/CatsDetails";
 
 export const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
             {
                 path: 'shop',
                 Component: ShopPage
+            },
+            {
+                path: 'category/:name',
+                Component: CatsDetails
             }
         ]
     },
