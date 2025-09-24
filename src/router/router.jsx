@@ -13,6 +13,8 @@ import Medicine from "../Pages/Dashboard/Medicine/Medicine";
 import ShopPage from "../Pages/ShopPage/ShopPage";
 import CatsDetails from "../Pages/CategoryDetails/CatsDetails";
 import Cart from "../Pages/Cart/Cart";
+import CheckoutPage from "../Pages/CheckoutPage/CheckoutPage";
+import PaymentPage from "../Pages/PaymentPage/PaymentPage";
 
 export const router = createBrowserRouter([
     {
@@ -34,6 +36,14 @@ export const router = createBrowserRouter([
             {
                 path: 'cart',
                 Component: Cart
+            },
+            {
+                path: 'checkout',
+                element: <PrivateRoute><CheckoutPage></CheckoutPage></PrivateRoute>
+            },
+            {
+                path: 'payment/:id',
+                element: <PrivateRoute><PaymentPage></PaymentPage></PrivateRoute>
             }
         ]
     },
@@ -70,7 +80,7 @@ export const router = createBrowserRouter([
             {
                 path: 'medicine',
                 Component: Medicine
-            }
+            },
 
         ]
     }
