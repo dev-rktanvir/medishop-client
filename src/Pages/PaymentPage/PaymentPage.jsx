@@ -46,7 +46,7 @@ const PaymentPage = () => {
                     <div className="mt-6 space-y-4">
                         <h3 className="inline-block font-bold text-primary">Pay With Stripe</h3>
                         <Elements stripe={stripePromise}>
-                            <StripeForm order={order}></StripeForm>
+                            <StripeForm order={order} id={id}></StripeForm>
                         </Elements>
                     </div>
                 </div>

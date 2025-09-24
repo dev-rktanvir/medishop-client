@@ -15,6 +15,7 @@ import CatsDetails from "../Pages/CategoryDetails/CatsDetails";
 import Cart from "../Pages/Cart/Cart";
 import CheckoutPage from "../Pages/CheckoutPage/CheckoutPage";
 import PaymentPage from "../Pages/PaymentPage/PaymentPage";
+import InvoicePage from "../Pages/InvoicePage/InvoicePage";
 
 export const router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
             {
                 path: 'payment/:id',
                 element: <PrivateRoute><PaymentPage></PaymentPage></PrivateRoute>
+            },
+            {
+                path: 'invoice/:id',
+                element: <PrivateRoute><InvoicePage></InvoicePage></PrivateRoute>
             }
         ]
     },

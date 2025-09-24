@@ -38,7 +38,7 @@ const DesktopCart = ({ cartItems, increaseQty, decreaseQty, removeItem }) => {
                                 </div>
                             </td>
                             <td className="p-3 text-center">
-                                ৳ {item.price * item.quantity}
+                                $ {item.price * item.quantity}
                             </td>
                             <td className="p-3 text-center">
                                 <button

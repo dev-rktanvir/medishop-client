@@ -5,7 +5,7 @@ import useAuth from '../../hooks/useAuth';
 import useAlert from '../../hooks/useAlert';
 import { useNavigate } from 'react-router';
 
-const StripeForm = ({ order }) => {
+const StripeForm = ({ order, id }) => {
     const stripe = useStripe();
     const elements = useElements();
     const { user } = useAuth();
@@ -60,7 +60,7 @@ const StripeForm = ({ order }) => {
                     text: "Your payment was completed successfully. Thank you!",
                     icon: "success",
                 });
-                navigate('/shop');
+                navigate(`/invoice/${id}`);
             }
             else setError(result.error.message);
         }

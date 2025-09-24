@@ -98,7 +98,7 @@ const Cart = () => {
                             Clear Cart
                         </button>
                         <div className="text-right">
-                            <p className="text-lg font-semibold">Total: ৳ {totalPrice}</p>
+                            <p className="text-lg font-semibold">Total: $ {totalPrice}</p>
                             <button
                                 onClick={handleCheckout}
                                 className="mt-2 bg-primary text-white px-6 py-2 rounded hover:bg-secondary cursor-pointer"

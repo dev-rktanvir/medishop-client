@@ -52,7 +52,10 @@ const CheckoutPage = () => {
             shipping: shippingData,
             deliveryCharge: deliveryCost,
             totalAmount: grandTotal,
-            paymentStatus: "unpaid",
+            paymentStatus: "Pending",
+            buyerMobile: shippingData.phone,
+            buyerEmail: user.email,
+            buyerName: shippingData.name,
             createdAt: new Date().toISOString(),
         };
 
