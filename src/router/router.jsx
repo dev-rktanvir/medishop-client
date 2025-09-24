@@ -16,6 +16,9 @@ import Cart from "../Pages/Cart/Cart";
 import CheckoutPage from "../Pages/CheckoutPage/CheckoutPage";
 import PaymentPage from "../Pages/PaymentPage/PaymentPage";
 import InvoicePage from "../Pages/InvoicePage/InvoicePage";
+import ManagePayments from "../Pages/Dashboard/ManagePayments/ManagePayments";
+import SellerPayment from "../Pages/Dashboard/SellerPayment/SellerPayment";
+import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 
 export const router = createBrowserRouter([
     {
@@ -86,6 +89,18 @@ export const router = createBrowserRouter([
                 path: 'medicine',
                 Component: Medicine
             },
+            {
+                path: 'manage-pay',
+                Component: ManagePayments
+            },
+            {
+                path: 'seller-pay',
+                Component: SellerPayment
+            },
+            {
+                path: 'payment-history',
+                Component: PaymentHistory
+            }
 
         ]
     }

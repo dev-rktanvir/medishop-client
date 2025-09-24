@@ -4,7 +4,7 @@ import ShopTable from "../../Components/ShopTable/ShopTable";
 
 const ShopPage = () => {
     const axiosSecure = useAxiosSecure();
-    const { data: allmedicines = [] } = useQuery({
+    const { data: allmedicines = [], refetch } = useQuery({
         queryKey: ['shop'],
         queryFn: async () => {
             const res = await axiosSecure.get('/medicine')
@@ -17,6 +17,7 @@ const ShopPage = () => {
             <ShopTable
                 medicines={allmedicines}
                 pageTitle={'Medicine Shop'}
+                refetch={refetch}
             ></ShopTable>
         </div>
     );

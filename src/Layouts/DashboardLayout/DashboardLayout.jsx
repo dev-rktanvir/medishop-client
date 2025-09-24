@@ -74,6 +74,9 @@ const DashboardLayout = () => {
                             { to: "manage-ads", icon: <FaEdit />, label: "Manage Ads" },                 
                             { to: "manage-cat", icon: <FaTags />, label: "Manage Category" },           
                             { to: "medicine", icon: <FaPills />, label: "Medicine" },
+                            { to: "manage-pay", icon: <FaPills />, label: "Payment Management" },
+                            { to: "seller-pay", icon: <FaPills />, label: "Payment" },
+                            { to: "payment-history", icon: <FaPills />, label: "Payment History" },
                         ].map((item) => (
                             <NavLink
                                 key={item.to}

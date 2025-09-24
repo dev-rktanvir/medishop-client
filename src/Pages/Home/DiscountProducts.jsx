@@ -11,6 +11,7 @@ import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { Link } from "react-router";
 
 // Helper function: 2 days later
 const getTwoDaysFromNow = () => {
@@ -120,9 +121,11 @@ const DiscountProducts = () => {
                                 <Countdown date={getTwoDaysFromNow()} renderer={CountdownRenderer} />
 
                                 {/* Add to Cart Button */}
-                                <button className="mt-4 bg-primary hover:bg-green-700 text-white font-bold text-lg px-4 py-2 rounded w-full">
-                                    Add to Cart
-                                </button>
+                                <Link to='/shop'>
+                                    <button className="mt-4 bg-primary hover:bg-secondary cursor-pointer text-white font-bold text-lg px-4 py-2 rounded w-full">
+                                        Buy Now
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     </SwiperSlide>

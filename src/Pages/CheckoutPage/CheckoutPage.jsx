@@ -52,7 +52,7 @@ const CheckoutPage = () => {
             shipping: shippingData,
             deliveryCharge: deliveryCost,
             totalAmount: grandTotal,
-            paymentStatus: "Pending",
+            paymentStatus: "pending",
             buyerMobile: shippingData.phone,
             buyerEmail: user.email,
             buyerName: shippingData.name,

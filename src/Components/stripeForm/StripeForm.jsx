@@ -60,6 +60,8 @@ const StripeForm = ({ order, id }) => {
                     text: "Your payment was completed successfully. Thank you!",
                     icon: "success",
                 });
+                const transId = result.paymentIntent.id;
+                await axiosSecure.put(`/orders/${id}`, { transactionId: transId })
                 navigate(`/invoice/${id}`);
             }
             else setError(result.error.message);
