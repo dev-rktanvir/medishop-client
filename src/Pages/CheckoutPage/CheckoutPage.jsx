@@ -52,7 +52,7 @@ const CheckoutPage = () => {
             shipping: shippingData,
             deliveryCharge: deliveryCost,
             totalAmount: grandTotal,
-            paymentStatus: 'Pending',
+            paymentStatus: "unpaid",
             createdAt: new Date().toISOString(),
         };
 

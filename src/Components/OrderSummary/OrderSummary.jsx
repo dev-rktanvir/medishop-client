@@ -23,7 +23,7 @@ const OrderSummary = ({ order }) => {
                 </ul>
             </div>
 
-            <div className='space-y-2'>
+            <div className='space-y-2 border-2 border-primary p-4 rounded-lg'>
                 <h3 className="inline-block font-bold text-primary">Cost:</h3>
                 <div className="flex justify-between">
                     <span>Items Total:</span>

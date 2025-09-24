@@ -3,7 +3,10 @@ import OrderSummary from '../../Components/OrderSummary/OrderSummary';
 import CartItem from '../../Components/CartItem/CartItem';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
-
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import StripeForm from '../../Components/stripeForm/StripeForm';
+const stripePromise = loadStripe(import.meta.env.VITE_Payment_Publish_key);
 const PaymentPage = () => {
     const { id } = useParams();
     const axiosSecure = useAxiosSecure()
@@ -31,7 +34,7 @@ const PaymentPage = () => {
 
                 {/* Right column: Cart items + payment button */}
                 <div className="p-4 rounded shadow space-y-4">
-                    <h2 className="text-xl font-semibold mb-4">Your Cart</h2>
+                    <h2 className="text-xl font-semibold mb-4">Your Products</h2>
 
                     <div className="space-y-4">
                         {order.items.map(item => (
@@ -40,15 +43,11 @@ const PaymentPage = () => {
                     </div>
 
                     {/* Payment button area */}
-                    <div className="mt-6">
-                        <button
-                            className="w-full bg-primary text-white py-3 font-bold cursor-pointer rounded hover:bg-secondary transition"
-                            onClick={() => {
-                                //    add payment
-                            }}
-                        >
-                            Pay Now
-                        </button>
+                    <div className="mt-6 space-y-4">
+                        <h3 className="inline-block font-bold text-primary">Pay With Stripe</h3>
+                        <Elements stripe={stripePromise}>
+                            <StripeForm order={order}></StripeForm>
+                        </Elements>
                     </div>
                 </div>
             </div>

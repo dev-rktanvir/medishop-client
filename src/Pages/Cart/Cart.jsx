@@ -101,7 +101,7 @@ const Cart = () => {
                             <p className="text-lg font-semibold">Total: ৳ {totalPrice}</p>
                             <button
                                 onClick={handleCheckout}
-                                className="mt-2 bg-primary text-white px-6 py-2 rounded hover:bg-green-700"
+                                className="mt-2 bg-primary text-white px-6 py-2 rounded hover:bg-secondary cursor-pointer"
                             >
                                 Checkout
                             </button>
