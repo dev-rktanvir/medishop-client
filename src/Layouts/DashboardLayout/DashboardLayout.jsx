@@ -14,30 +14,43 @@ import {
     FaEdit,
     FaTags,
     FaPills,
+    FaCreditCard,
+    FaMoneyCheckAlt,
+    FaHistory,
+    FaFileAlt,
 } from "react-icons/fa";
 import Logo from "../../Components/Logo/Logo";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useUserRole from "../../hooks/useUserRole";
 
 const DashboardLayout = () => {
+    const { isAdmin, isSeller, isUser, isLoading } = useUserRole();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const { user, logoutUser } = useAuth();
 
     const handleLogout = () => {
         logoutUser().then(() => {
             Swal.fire({
-                title: 'Logged Out Successfully!',
-                text: 'You have been logged out of your account.',
-                icon: 'success',
-                confirmButtonText: 'OK',
-                background: '#f2f6f7',
-                color: '#071c1f',
-                confirmButtonColor: '#0a9a73',
+                title: "Logged Out Successfully!",
+                text: "You have been logged out of your account.",
+                icon: "success",
+                confirmButtonText: "OK",
+                background: "#f2f6f7",
+                color: "#071c1f",
+                confirmButtonColor: "#0a9a73",
                 timer: 1500,
                 showConfirmButton: false,
             });
         });
     };
+
+    const navLinkClass = ({ isActive }) =>
+        `flex items-center gap-3 px-4 py-2 rounded-lg transition ${isActive ? "bg-primary" : "hover:bg-accent"}`;
+
+    if (isLoading) {
+        return <div className="text-center py-10">Loading dashboard...</div>;
+    }
 
     return (
         <div className="min-h-screen flex bg-base-200">
@@ -68,31 +81,58 @@ const DashboardLayout = () => {
 
                     {/* Navigation */}
                     <nav className="p-4 space-y-2">
-                        {[
-                            { to: "/dashboard", icon: <FaChartBar />, label: "Dashboard" },
-                            { to: "advertisement", icon: <FaBullhorn />, label: "Advertisement" },       
-                            { to: "manage-ads", icon: <FaEdit />, label: "Manage Ads" },                 
-                            { to: "manage-cat", icon: <FaTags />, label: "Manage Category" },           
-                            { to: "medicine", icon: <FaPills />, label: "Medicine" },
-                            { to: "manage-pay", icon: <FaPills />, label: "Payment Management" },
-                            { to: "seller-pay", icon: <FaPills />, label: "Payment" },
-                            { to: "payment-history", icon: <FaPills />, label: "Payment History" },
-                            { to: "sales-report", icon: <FaPills />, label: "Sales Report" },
-                            { to: "manage-user", icon: <FaPills />, label: "Manage User" },
-                        ].map((item) => (
-                            <NavLink
-                                key={item.to}
-                                to={item.to}
-                                end
-                                className={({ isActive }) =>
-                                    `flex items-center gap-3 px-4 py-2 rounded-lg transition ${isActive ? "bg-primary" : "hover:bg-accent"
-                                    }`
-                                }
-                                onClick={() => setIsSidebarOpen(false)}
-                            >
-                                {item.icon} {item.label}
+                        {/* Shared */}
+                        <NavLink
+                            to="/dashboard"
+                            end
+                            className={navLinkClass}
+                            onClick={() => setIsSidebarOpen(false)}
+                        >
+                            <FaChartBar /> Dashboard
+                        </NavLink>
+
+                        {/* Admin Only */}
+                        {isAdmin && (
+                            <>
+                                <NavLink to="manage-user" className={navLinkClass} onClick={() => setIsSidebarOpen(false)}>
+                                    <FaUsers /> Manage User
+                                </NavLink>
+                                <NavLink to="manage-cat" className={navLinkClass} onClick={() => setIsSidebarOpen(false)}>
+                                    <FaTags /> Manage Category
+                                </NavLink>
+                                <NavLink to="manage-pay" className={navLinkClass} onClick={() => setIsSidebarOpen(false)}>
+                                    <FaCreditCard /> Payment Management
+                                </NavLink>
+                                <NavLink to="sales-report" className={navLinkClass} onClick={() => setIsSidebarOpen(false)}>
+                                    <FaFileAlt /> Sales Report
+                                </NavLink>
+                                <NavLink to="manage-ads" className={navLinkClass} onClick={() => setIsSidebarOpen(false)}>
+                                    <FaEdit /> Manage Banner Advertise
+                                </NavLink>
+                            </>
+                        )}
+
+                        {/* Seller Only */}
+                        {isSeller && (
+                            <>
+                                <NavLink to="medicine" className={navLinkClass} onClick={() => setIsSidebarOpen(false)}>
+                                    <FaPills /> Manage Medicines
+                                </NavLink>
+                                <NavLink to="seller-pay" className={navLinkClass} onClick={() => setIsSidebarOpen(false)}>
+                                    <FaMoneyCheckAlt /> Payment History
+                                </NavLink>
+                                <NavLink to="advertisement" className={navLinkClass} onClick={() => setIsSidebarOpen(false)}>
+                                    <FaBullhorn /> Ask For Advertisement
+                                </NavLink>
+                            </>
+                        )}
+
+                        {/* User Only */}
+                        {isUser && (
+                            <NavLink to="payment-history" className={navLinkClass} onClick={() => setIsSidebarOpen(false)}>
+                                <FaHistory /> Payment History
                             </NavLink>
-                        ))}
+                        )}
                     </nav>
                 </div>
 
@@ -111,14 +151,12 @@ const DashboardLayout = () => {
                             handleLogout();
                             setIsSidebarOpen(false);
                         }}
-                        className="flex items-center gap-3 w-full px-4 py-2 rounded-lg transition hover:bg-accent text-left"
+                        className="flex items-center gap-3 w-full px-4 py-2 rounded-lg transition hover:bg-accent text-left cursor-pointer"
                     >
                         <FaSignOutAlt /> Logout
                     </button>
 
-                    <p className="text-xs text-center text-accent mt-4">
-                        © 2025 MediShop
-                    </p>
+                    <p className="text-xs text-center text-accent mt-4">© 2025 MediShop</p>
                 </div>
             </aside>
 
@@ -142,9 +180,7 @@ const DashboardLayout = () => {
                         >
                             <FaBars />
                         </button>
-                        <h1 className="text-lg font-semibold text-secondary">
-                            Dashboard
-                        </h1>
+                        <h1 className="text-lg font-semibold text-secondary">Dashboard</h1>
                     </div>
 
                     <div className="flex items-center gap-4">

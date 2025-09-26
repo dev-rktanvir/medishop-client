@@ -21,6 +21,9 @@ import SellerPayment from "../Pages/Dashboard/SellerPayment/SellerPayment";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import SalesReport from "../Pages/Dashboard/SalesReport/SalesReport";
 import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
+import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
+import Forbidden from "../Pages/Forbidden/Forbidden";
+import NotFound from "../Pages/NotFound/NotFound";
 
 export const router = createBrowserRouter([
     {
@@ -54,6 +57,14 @@ export const router = createBrowserRouter([
             {
                 path: 'invoice/:id',
                 element: <PrivateRoute><InvoicePage></InvoicePage></PrivateRoute>
+            },
+            {
+                path: 'forbidden',
+                Component: Forbidden
+            },
+            {
+                path: '/*',
+                Component: NotFound
             }
         ]
     },
@@ -75,6 +86,10 @@ export const router = createBrowserRouter([
         path: "/dashboard",
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
+            {
+                index: true,
+                Component: DashboardHome
+            },
             {
                 path: 'advertisement',
                 Component: Advertisement

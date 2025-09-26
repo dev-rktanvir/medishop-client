@@ -61,7 +61,7 @@ const ManageUsers = () => {
                 />
                 <button
                     type="submit"
-                    className="bg-primary text-white px-4 py-2 rounded-md hover:bg-secondary"
+                    className="bg-primary text-white cursor-pointer px-4 py-2 rounded-md hover:bg-secondary"
                 >
                     Search
                 </button>
@@ -109,7 +109,7 @@ const ManageUsers = () => {
                                                 <button
                                                     onClick={() => handleRoleChange(user._id, "admin")}
                                                     disabled={updating === user._id}
-                                                    className="px-5 py-2 bg-primary text-white rounded-md font-bold hover:opacity-90 disabled:opacity-50"
+                                                    className="px-5 py-2 bg-primary text-white rounded-md font-bold hover:opacity-90 disabled:opacity-50 cursor-pointer"
                                                 >
                                                     Make Admin
                                                 </button>
@@ -119,7 +119,7 @@ const ManageUsers = () => {
                                                 <button
                                                     onClick={() => handleRoleChange(user._id, "seller")}
                                                     disabled={updating === user._id}
-                                                    className="px-5 py-2 bg-secondary text-white rounded-md font-bold hover:opacity-90 disabled:opacity-50"
+                                                    className="px-5 py-2 bg-secondary text-white rounded-md font-bold hover:opacity-90 disabled:opacity-50 cursor-pointer"
                                                 >
                                                     Make Seller
                                                 </button>
@@ -129,7 +129,7 @@ const ManageUsers = () => {
                                                 <button
                                                     onClick={() => handleRoleChange(user._id, "user")}
                                                     disabled={updating === user._id}
-                                                    className="px-5 py-2 bg-red-600 text-white rounded-md font-bold hover:opacity-90 disabled:opacity-50"
+                                                    className="px-5 py-2 bg-red-600 text-white rounded-md font-bold hover:opacity-90 disabled:opacity-50 cursor-pointer"
                                                 >
                                                     Make User
                                                 </button>
