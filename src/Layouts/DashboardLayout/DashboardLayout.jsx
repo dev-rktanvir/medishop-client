@@ -23,6 +23,7 @@ import Logo from "../../Components/Logo/Logo";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import useUserRole from "../../hooks/useUserRole";
+import Loading from "../../Components/Loading/Loading";
 
 const DashboardLayout = () => {
     const { isAdmin, isSeller, isUser, isLoading } = useUserRole();
@@ -49,7 +50,7 @@ const DashboardLayout = () => {
         `flex items-center gap-3 px-4 py-2 rounded-lg transition ${isActive ? "bg-primary" : "hover:bg-accent"}`;
 
     if (isLoading) {
-        return <div className="text-center py-10">Loading dashboard...</div>;
+        return <div className="text-center py-10"><Loading></Loading></div>;
     }
 
     return (

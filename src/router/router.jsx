@@ -24,6 +24,9 @@ import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
 import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
 import Forbidden from "../Pages/Forbidden/Forbidden";
 import NotFound from "../Pages/NotFound/NotFound";
+import AdminRoute from "../route/AdminRoute/AdminRoute";
+import SellerRoute from "../route/SellerRoute/SellerRoute";
+import UserRoute from "../route/UserRoute/UserRoute";
 
 export const router = createBrowserRouter([
     {
@@ -90,43 +93,51 @@ export const router = createBrowserRouter([
                 index: true,
                 Component: DashboardHome
             },
+
+            // Admin Route
+
             {
-                path: 'advertisement',
-                Component: Advertisement
-            },
-            {
-                path: 'manage-ads',
-                Component: ManageAds
+                path: 'manage-user',
+                element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
             },
             {
                 path: 'manage-cat',
-                Component: ManageCat
-            },
-            {
-                path: 'medicine',
-                Component: Medicine
+                element: <AdminRoute><ManageCat></ManageCat></AdminRoute>
             },
             {
                 path: 'manage-pay',
-                Component: ManagePayments
-            },
-            {
-                path: 'seller-pay',
-                Component: SellerPayment
-            },
-            {
-                path: 'payment-history',
-                Component: PaymentHistory
+                element: <AdminRoute><ManagePayments></ManagePayments></AdminRoute>
             },
             {
                 path: 'sales-report',
-                Component: SalesReport
+                element: <AdminRoute><SalesReport></SalesReport></AdminRoute>
             },
             {
-                path: 'manage-user',
-                Component: ManageUsers
-            }
+                path: 'manage-ads',
+                element: <AdminRoute><ManageAds></ManageAds></AdminRoute>
+            },
 
+            // Seller Route
+
+            {
+                path: 'medicine',
+                element: <SellerRoute><Medicine></Medicine></SellerRoute>
+            },
+            {
+                path: 'seller-pay',
+                element: <SellerRoute><SellerPayment></SellerPayment></SellerRoute>
+            },
+            {
+                path: 'advertisement',
+                element: <SellerRoute><Advertisement></Advertisement></SellerRoute>
+            },
+
+            // User Route
+            
+            {
+                path: 'payment-history',
+                element: <UserRoute><PaymentHistory></PaymentHistory></UserRoute>
+            }
         ]
     }
 ]);
