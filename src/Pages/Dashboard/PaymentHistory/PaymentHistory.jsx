@@ -18,8 +18,10 @@ const PaymentHistory = () => {
         <div className="p-6 bg-white rounded-xl shadow-md">
             <h2 className="text-xl font-bold text-secondary mb-6">Manage Payments</h2>
 
-            <div className="overflow-x-auto">
-                <table className="min-w-full text-left border border-gray-200 rounded-lg">
+            {/* Responsive wrapper: add w-full and block */}
+            <div className="overflow-x-auto w-full block">
+                {/* Add whitespace-nowrap to prevent cell text from wrapping */}
+                <table className="min-w-full whitespace-nowrap text-left border border-gray-200 rounded-lg">
                     <thead className="bg-base-200 text-secondary">
                         <tr>
                             <th className="px-4 py-3">Medicine</th>

@@ -20,6 +20,7 @@ import ManagePayments from "../Pages/Dashboard/ManagePayments/ManagePayments";
 import SellerPayment from "../Pages/Dashboard/SellerPayment/SellerPayment";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import SalesReport from "../Pages/Dashboard/SalesReport/SalesReport";
+import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
 
 export const router = createBrowserRouter([
     {
@@ -105,6 +106,10 @@ export const router = createBrowserRouter([
             {
                 path: 'sales-report',
                 Component: SalesReport
+            },
+            {
+                path: 'manage-user',
+                Component: ManageUsers
             }
 
         ]

@@ -5,6 +5,7 @@ import useAlert from "../../../hooks/useAlert";
 const ManagePayment = () => {
     const axiosSecure = useAxiosSecure();
     const showAlert = useAlert();
+
     const { data: payments = [], isLoading, refetch } = useQuery({
         queryKey: ["payments"],
         queryFn: async () => {
@@ -31,8 +32,8 @@ const ManagePayment = () => {
         <div className="p-6 bg-white rounded-xl shadow-md">
             <h2 className="text-xl font-bold text-secondary mb-6">Manage Payments</h2>
 
-            <div className="overflow-x-auto">
-                <table className="min-w-full text-left border border-gray-200 rounded-lg">
+            <div className="overflow-x-auto w-full block">
+                <table className="min-w-full whitespace-nowrap text-left border border-gray-200 rounded-lg">
                     <thead className="bg-base-200 text-secondary">
                         <tr>
                             <th className="px-4 py-3">User</th>

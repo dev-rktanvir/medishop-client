@@ -78,6 +78,7 @@ const DashboardLayout = () => {
                             { to: "seller-pay", icon: <FaPills />, label: "Payment" },
                             { to: "payment-history", icon: <FaPills />, label: "Payment History" },
                             { to: "sales-report", icon: <FaPills />, label: "Sales Report" },
+                            { to: "manage-user", icon: <FaPills />, label: "Manage User" },
                         ].map((item) => (
                             <NavLink
                                 key={item.to}

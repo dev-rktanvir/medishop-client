@@ -147,9 +147,10 @@ const SalesReport = () => {
             </div>
 
             {/* Sales Report with Logo */}
+            {/* Add w-full and block for responsiveness */}
             <div
                 ref={tableRef}
-                className="overflow-x-auto bg-white p-6 rounded-lg border border-gray-200"
+                className="overflow-x-auto w-full block bg-white p-6 rounded-lg border border-gray-200"
             >
                 {/* Logo added here */}
                 <div className="mb-6 flex items-center justify-between border-b pb-4">
@@ -164,7 +165,8 @@ const SalesReport = () => {
                     </div>
                 </div>
 
-                <table className="min-w-full text-left border border-gray-200 rounded-lg">
+                {/* Add whitespace-nowrap to table for preventing cell wrapping */}
+                <table className="min-w-full whitespace-nowrap text-left border border-gray-200 rounded-lg">
                     <thead className="bg-base-200 text-secondary">
                         <tr>
                             <th className="px-4 py-3">#</th>
