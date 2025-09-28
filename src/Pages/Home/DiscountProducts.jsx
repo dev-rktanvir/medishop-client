@@ -43,7 +43,7 @@ const DiscountProducts = () => {
     const { data: discountProducts = [], isLoading } = useQuery({
         queryKey: ["discountPrice"],
         queryFn: async () => {
-            const res = await axiosSecure.get("/medicine");
+            const res = await axiosSecure.get("/discount");
             return res.data.filter((product) => product.discount > 0);
         },
     });

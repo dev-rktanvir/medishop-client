@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaPlus, FaTrash, FaEdit } from "react-icons/fa";
 import AddMedicineModal from "./AddMedicineModal";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
