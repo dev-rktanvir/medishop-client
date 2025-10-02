@@ -36,3 +36,7 @@ https://medishop-e5ba4.web.app/
 ## Github Repo
 - Client: https://github.com/dev-rktanvir/medishop-client
 - Server: https://github.com/dev-rktanvir/medishop-server
+
+## Developer
+- Rk Tanvir
+- WhatsApp: 01680523960
