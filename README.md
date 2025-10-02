@@ -29,3 +29,10 @@
 - **File Handling:** Image upload via third-party hosting (e.g., ImgBB, Cloudinary)
 - **PDF & Report Tools:** jsPDF, XLSX, react-data-table-component
 - **Other Tools:** React Helmet, re-title, SweetAlert2, SwiperJS
+
+## Live Link
+https://medishop-e5ba4.web.app/
+
+## Github Repo
+- Client: https://github.com/dev-rktanvir/medishop-client
+- Server: https://github.com/dev-rktanvir/medishop-server
