@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAlert from "../../../hooks/useAlert";
+import Loading from "../../../Components/Loading/Loading";
 
 const ManagePayment = () => {
     const axiosSecure = useAxiosSecure();
@@ -26,7 +27,7 @@ const ManagePayment = () => {
         refetch();
     };
 
-    if (isLoading) return <p className="text-center">Loading...</p>;
+    if (isLoading) return <p className="text-center"><Loading></Loading></p>;
 
     return (
         <div className="p-6 bg-white rounded-xl shadow-md">

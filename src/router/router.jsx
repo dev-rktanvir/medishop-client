@@ -27,6 +27,9 @@ import NotFound from "../Pages/NotFound/NotFound";
 import AdminRoute from "../route/AdminRoute/AdminRoute";
 import SellerRoute from "../route/SellerRoute/SellerRoute";
 import UserRoute from "../route/UserRoute/UserRoute";
+import Contact from "../Pages/Contact/Contact";
+import RequestOrder from "../Pages/RequestOrder/RequestOrder";
+import UploadPrescription from "../Pages/UploadPrescription/UploadPrescription";
 
 export const router = createBrowserRouter([
     {
@@ -40,6 +43,10 @@ export const router = createBrowserRouter([
             {
                 path: 'shop',
                 Component: ShopPage
+            },
+            {
+                path: '/contact',
+                Component: Contact
             },
             {
                 path: 'category/:name',
@@ -60,6 +67,14 @@ export const router = createBrowserRouter([
             {
                 path: 'invoice/:id',
                 element: <PrivateRoute><InvoicePage></InvoicePage></PrivateRoute>
+            },
+            {
+                path: '/req-order',
+                element: <PrivateRoute><RequestOrder></RequestOrder></PrivateRoute>
+            },
+            {
+                path: '/upload-prescription',
+                element: <PrivateRoute><UploadPrescription></UploadPrescription></PrivateRoute>
             },
             {
                 path: 'forbidden',

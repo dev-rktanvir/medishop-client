@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
 
-const sliderPromiss = fetch('http://localhost:5000/all-ads').then(res => res.json());
+const sliderPromiss = fetch('https://medishop-server-xi.vercel.app/all-ads').then(res => res.json());
 const SliderBanner = () => {
     const slides = use(sliderPromiss);
     const activeSlides = slides.filter(slide => slide.status === 'active');
@@ -20,7 +20,7 @@ const SliderBanner = () => {
     };
 
     return (
-        <div className="w-full overflow-hidden shadow-xl">
+        <div className="w-full shadow-xl">
             <Slider {...settings}>
                 {activeSlides.map((slide) => (
                     <div key={slide._id}>

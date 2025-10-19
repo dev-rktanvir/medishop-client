@@ -102,7 +102,7 @@ const DiscountProducts = () => {
                                 <img
                                     src={product.image}
                                     alt={product.name}
-                                    className="object-cover w-full h-auto max-h-64 rounded"
+                                    className="object-cover w-full h-56 lg:h-64 rounded"
                                 />
                             </div>
 
