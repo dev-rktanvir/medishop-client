@@ -56,7 +56,7 @@ const MobileNavbar = () => {
     ];
 
     return (
-        <nav className="bg-white shadow-md sticky top-0 z-50 lg:hidden">
+        <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-50 lg:hidden">
             <div className="flex flex-col items-center py-3">
                 <Logo />
 
