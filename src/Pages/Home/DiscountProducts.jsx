@@ -65,8 +65,10 @@ const DiscountProducts = () => {
     }
 
     return (
-        <section className="max-w-7xl mx-auto my-10 px-4">
-            <h2 className="text-2xl font-bold text-center mb-6">Deal Of The Day</h2>
+        <section className="max-w-7xl mx-auto my-20 px-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-secondary text-center mb-10 lg:mb-16">
+                Deals Of The Day
+            </h2>
 
             <Swiper
                 modules={[Pagination, Navigation, Autoplay]}

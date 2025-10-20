@@ -20,7 +20,7 @@ const FeaturedSection = () => {
     ];
 
     return (
-        <section className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <section className="max-w-7xl mx-auto px-4 py-10 lg:py-20 mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
             {cards.map((card) => (
                 <div
                     key={card.id}

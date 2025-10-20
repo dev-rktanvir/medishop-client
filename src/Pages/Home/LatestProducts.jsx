@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { AiFillStar } from 'react-icons/ai';
-import useAxiosSecure from '../../hooks/useAxiosSecure'; // adjust path as needed
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { Link } from 'react-router';
 
 const LatestProducts = () => {

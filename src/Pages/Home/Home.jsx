@@ -8,6 +8,7 @@ import useAuth from '../../hooks/useAuth';
 import Loading from '../../Components/Loading/Loading';
 import LatestProducts from './LatestProducts';
 import ServiceFeatures from './ServiceFeatures/ServiceFeatures';
+import Review from './Review/Review';
 
 const Home = () => {
     const { loading } = useAuth();
@@ -21,8 +22,10 @@ const Home = () => {
             <PopularCategories></PopularCategories>
             <LatestProducts></LatestProducts>
             <CareSection></CareSection>
-            <ServiceFeatures></ServiceFeatures>
             <DiscountProducts></DiscountProducts>
+            <Review></Review>
+            <ServiceFeatures></ServiceFeatures>
+
         </div>
     );
 };

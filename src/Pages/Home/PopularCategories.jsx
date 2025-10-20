@@ -26,7 +26,7 @@ const PopularCategories = () => {
         <section>
             <div className="max-w-7xl mx-auto px-4 py-12">
                 {/* Title */}
-                <h2 className="text-3xl font-bold text-center text-secondary md:mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold text-secondary text-center mb-10 lg:mb-16">
                     Popular Categories
                 </h2>
 
