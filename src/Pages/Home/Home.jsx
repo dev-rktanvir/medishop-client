@@ -6,6 +6,8 @@ import DiscountProducts from './DiscountProducts';
 import CareSection from './CareSection';
 import useAuth from '../../hooks/useAuth';
 import Loading from '../../Components/Loading/Loading';
+import LatestProducts from './LatestProducts';
+import ServiceFeatures from './ServiceFeatures/ServiceFeatures';
 
 const Home = () => {
     const { loading } = useAuth();
@@ -17,7 +19,9 @@ const Home = () => {
             <SliderBanner></SliderBanner>
             <FeaturedSection></FeaturedSection>
             <PopularCategories></PopularCategories>
+            <LatestProducts></LatestProducts>
             <CareSection></CareSection>
+            <ServiceFeatures></ServiceFeatures>
             <DiscountProducts></DiscountProducts>
         </div>
     );

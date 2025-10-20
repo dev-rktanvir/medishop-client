@@ -12,7 +12,7 @@ const CareSection = () => {
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/5"></div>
 
-            <div className="relative container mx-auto px-6 grid md:grid-cols-2 items-center">
+            <div className="relative max-w-7xl container mx-auto px-6 grid md:grid-cols-2 items-center">
                 {/* Left Column */}
                 <div className="text-secondary space-y-5">
                     <h4 className="text-lg font-semibold tracking-widest">
